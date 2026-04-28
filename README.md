@@ -2,7 +2,7 @@
 
 **10M+ price snapshots. 9,550+ markets. 30 days rolling. 15-minute resolution.**
 
-The complete dataset behind a [public live-traded strategy](https://github.com/LuciferForge/pm-crash-bot-template) (302 trades, 79.8% win rate). Free samples on Hugging Face. Full dataset and live API on Gumroad / [api.protodex.io](https://api.protodex.io).
+The complete dataset behind a [public live-traded strategy](https://github.com/LuciferForge/polymarket-crash-bot) (302 trades, 79.8% win rate). Free samples on Hugging Face. Full dataset and live API on Gumroad / [api.protodex.io](https://api.protodex.io).
 
 ## Coverage
 
@@ -22,7 +22,7 @@ The complete dataset behind a [public live-traded strategy](https://github.com/L
 | Tier | Price | Format | Where |
 |------|-------|--------|-------|
 | **Free sample (1 day)** | $0 | SQLite + CSV | [Hugging Face](https://huggingface.co/datasets/manja316/polymarket-historical-prices) |
-| **Cross-signal sample** (BTC/ETH/SOL + PM probabilities) | $0 | CSV | [Hugging Face](https://huggingface.co/datasets/manja316/crypto-prediction-market-signals) |
+| **Cross-signal sample** (BTC/ETH/SOL + Polymarket probabilities) | $0 | CSV | [Hugging Face](https://huggingface.co/datasets/manja316/crypto-prediction-market-signals) |
 | Sample paid (1 day full SQLite) | $1 | SQLite | [Gumroad](https://manja8.gumroad.com/l/polymarket-data) |
 | Full dataset (30 days) | $9 | SQLite | [Gumroad](https://manja8.gumroad.com/l/agyjd) |
 | **Live API** (no download, query directly) | Free 100/day · $19/mo Pro | HTTP/JSON | [api.protodex.io](https://api.protodex.io) |
@@ -88,12 +88,12 @@ CREATE TABLE orderbooks (
 
 ## Strategy / research using this data
 
-This dataset powers a public-audited [crash-recovery bot](https://github.com/LuciferForge/pm-crash-bot-template):
+This dataset powers a public-audited [crash-recovery bot](https://github.com/LuciferForge/polymarket-crash-bot):
 - **302 live trades · 79.8% win rate · 2.6× win/loss ratio**
 - Backtest: 6,225 trades on the full dataset, 75% WR
 - Documented finding: after a >20% crash, average bounce is +6.6% within 15 minutes (n=5,629)
 
-Full methodology: [pm-crash-bot-template](https://github.com/LuciferForge/pm-crash-bot-template).
+Full methodology: [polymarket-crash-bot](https://github.com/LuciferForge/polymarket-crash-bot).
 Live PnL: [api.protodex.io/live](https://api.protodex.io/live).
 
 ## What you can build with this

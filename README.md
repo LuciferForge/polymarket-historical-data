@@ -1,6 +1,6 @@
 # Polymarket Historical Data
 
-**18.1M+ price snapshots. 18,200+ markets. 75 days of history (since 2026-03-28). 15-minute resolution.**
+**18.3M+ price snapshots. 18,300+ markets. 75 days of history (since 2026-03-28). 15-minute resolution.**
 
 The complete dataset behind a [public live-traded strategy](https://github.com/LuciferForge/polymarket-crash-bot) (302 trades, 79.8% win rate). Free samples on Hugging Face. Full dataset and live API on Gumroad / [api.protodex.io](https://api.protodex.io).
 
@@ -8,9 +8,9 @@ The complete dataset behind a [public live-traded strategy](https://github.com/L
 
 | Table | Rows | Description |
 |-------|------|-------------|
-| `markets` | 18,200+ | Question, category, volume_24h, liquidity, end_date |
-| `prices` | 18,100,000+ | 15-min OHLC snapshots for YES/NO outcomes |
-| `orderbooks` | 1,790,000+ | Bid/ask depth snapshots |
+| `markets` | 18,300+ | Question, category, volume_24h, liquidity, end_date |
+| `prices` | 18,300,000+ | 15-min OHLC snapshots for YES/NO outcomes |
+| `orderbooks` | 1,800,000+ | Bid/ask depth snapshots |
 
 - **Source:** Polymarket Gamma + CLOB APIs (no scraping, no proprietary data)
 - **Update cadence:** every 15 minutes via [ForgeOS](https://github.com/LuciferForge/forgeos) launchd job

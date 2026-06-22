@@ -1,21 +1,23 @@
 # Polymarket Historical Data
 
-**17.26M+ price snapshots. 20,585 markets. 84 days of history (since 2026-03-28). 15-minute resolution.**
+**17.4M+ price snapshots. 20,868 markets. 86 days of history (since 2026-03-28). 15-minute resolution.**
 
 The complete dataset behind a [public live-traded strategy](https://github.com/LuciferForge/polymarket-crash-bot) (302 trades, 79.8% win rate). Free samples on Hugging Face. Full dataset and live API on Gumroad / [api.protodex.io](https://api.protodex.io).
+
+> Every figure above was counted from the live database on 2026-06-22. The archive grows ~200k rows/day; numbers are a floor, not an estimate.
 
 ## Coverage
 
 | Table | Rows | Description |
 |-------|------|-------------|
-| `markets` | 20,585 | Question, category, volume_24h, liquidity, end_date |
-| `prices` | 17,256,332 | 15-min snapshots for YES/NO outcomes (18,042 markets with price history) |
-| `orderbooks` | 1,721,218 | Bid/ask depth snapshots |
+| `markets` | 20,868 | Question, category, volume_24h, liquidity, end_date |
+| `prices` | 17,456,232 | 15-min snapshots for YES/NO outcomes |
+| `orderbooks` | 1,740,816 | Bid/ask depth snapshots |
 
 - **Source:** Polymarket Gamma + CLOB APIs (no scraping, no proprietary data)
 - **Update cadence:** every 15 minutes via a ForgeOS launchd job
-- **Categories:** politics, sports, crypto, economics, geopolitics, weather, science
-- **Format:** SQLite (single file, queryable from any language)
+- **Categories:** sports (2,966), crypto (2,601), politics (1,393), geopolitics (648), science/tech (284), and more
+- **Format:** SQLite (single file, queryable from any language) + daily Parquet export
 
 ## Get the data
 
@@ -23,10 +25,10 @@ The complete dataset behind a [public live-traded strategy](https://github.com/L
 |------|-------|--------|-------|
 | **Free sample (1 day)** | $0 | SQLite + CSV | [Hugging Face](https://huggingface.co/datasets/manja316/polymarket-historical-prices) |
 | **Cross-signal sample** (BTC/ETH/SOL + Polymarket probabilities) | $0 | CSV | [Hugging Face](https://huggingface.co/datasets/manja316/crypto-prediction-market-signals) |
-| Sample paid (1 day full SQLite) | $1 | SQLite | [Gumroad](https://manja8.gumroad.com/l/polymarket-data) |
-| Full dataset (30 days) | $9 | SQLite | [Gumroad](https://manja8.gumroad.com/l/agyjd) |
+| Sample paid (1 day full SQLite) | $1 | SQLite | [Gumroad](https://manja8.gumroad.com/l/polymarket-data?utm_source=github&utm_medium=readme&utm_campaign=polymarket-data-2026-06-22) |
+| Full dataset (30 days) | $9 | SQLite | [Gumroad](https://manja8.gumroad.com/l/agyjd?utm_source=github&utm_medium=readme&utm_campaign=polymarket-data-2026-06-22) |
 | **Live API** (no download, query directly) | Free 100/day · $19/mo Pro | HTTP/JSON | [api.protodex.io](https://api.protodex.io) |
-| Live subscription (auto-refreshing dataset) | $29/mo | SQLite | [Gumroad](https://manja8.gumroad.com/l/luneql) |
+| Live subscription (auto-refreshing dataset) | $29/mo | SQLite | [Gumroad](https://manja8.gumroad.com/l/luneql?utm_source=github&utm_medium=readme&utm_campaign=polymarket-data-2026-06-22) |
 
 ## Quick start (Python)
 
@@ -89,7 +91,7 @@ CREATE TABLE orderbooks (
 ## Strategy / research using this data
 
 This dataset powers a public-audited [crash-recovery bot](https://github.com/LuciferForge/polymarket-crash-bot):
-- **302 live trades · 79.8% win rate · 2.6× win/loss ratio**
+- **302 live trades · 79.8% win rate · 2.6x win/loss ratio**
 - Backtest: 6,225 trades on the full dataset, 75% WR
 - Documented finding: after a >20% crash, average bounce is +6.6% within 15 minutes (n=5,629)
 

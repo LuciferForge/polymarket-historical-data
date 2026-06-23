@@ -1,22 +1,22 @@
 # Polymarket Historical Data
 
-**17.4M+ price snapshots. 20,868 markets. 86 days of history (since 2026-03-28). 15-minute resolution.**
+**17.2M+ price snapshots. 20,585 markets. 85 days of history (2026-03-28 → 2026-06-21). 15-minute resolution.**
 
 The complete dataset behind a [public live-traded strategy](https://github.com/LuciferForge/polymarket-crash-bot) (302 trades, 79.8% win rate). Free samples on Hugging Face. Full dataset and live API on Gumroad / [api.protodex.io](https://api.protodex.io).
 
-> Every figure above was counted from the live database on 2026-06-22. The archive grows ~200k rows/day; numbers are a floor, not an estimate.
+> Every figure above was counted directly from the delivered SQLite export on 2026-06-21 — what you download is exactly this file, not an estimate. The separate **live API** ([api.protodex.io](https://api.protodex.io)) is refreshed every 15 minutes and currently serves **20.7M+ snapshots across 21,121 markets** (through 2026-06-23). The archive grows ~200k rows/day.
 
 ## Coverage
 
 | Table | Rows | Description |
 |-------|------|-------------|
-| `markets` | 20,868 | Question, category, volume_24h, liquidity, end_date |
-| `prices` | 17,456,232 | 15-min snapshots for YES/NO outcomes |
-| `orderbooks` | 1,740,816 | Bid/ask depth snapshots |
+| `markets` | 20,585 | Question, category, volume_24h, liquidity, end_date |
+| `prices` | 17,256,332 | 15-min snapshots for YES/NO outcomes |
+| `orderbooks` | 1,721,218 | Bid/ask depth snapshots |
 
 - **Source:** Polymarket Gamma + CLOB APIs (no scraping, no proprietary data)
 - **Update cadence:** every 15 minutes via a ForgeOS launchd job
-- **Categories:** sports (2,966), crypto (2,601), politics (1,393), geopolitics (648), science/tech (284), and more
+- **Categories:** sports (2,939), crypto (2,589), politics (1,386), geopolitics (618), science/tech (283), and more
 - **Format:** SQLite (single file, queryable from any language) + daily Parquet export
 
 ## Get the data

@@ -1,22 +1,22 @@
 # Polymarket Historical Data
 
-**17.2M+ price snapshots. 20,585 markets. 85 days of history (2026-03-28 → 2026-06-21). 15-minute resolution.**
+**17.9M+ price snapshots. 21,545 markets. 88 days of history (2026-03-28 → 2026-06-24). 15-minute resolution.**
 
 The complete dataset behind a [public live-traded strategy](https://github.com/LuciferForge/polymarket-crash-bot) (302 trades, 79.8% win rate). Free samples on Hugging Face. Full dataset and live API on Gumroad / [api.protodex.io](https://api.protodex.io).
 
-> Every figure above was counted directly from the delivered SQLite export on 2026-06-21 — what you download is exactly this file, not an estimate. The separate **live API** ([api.protodex.io](https://api.protodex.io)) is refreshed every 15 minutes and currently serves **20.7M+ snapshots across 21,121 markets** (through 2026-06-23). The archive grows ~200k rows/day.
+> Every figure above was counted directly from the delivered SQLite export on 2026-06-25 — what you download is exactly this file, not an estimate. The separate **live API** ([api.protodex.io](https://api.protodex.io)) is refreshed every 15 minutes and currently serves **20.7M+ snapshots across 21,121 markets** (through 2026-06-23). The archive grows ~200k rows/day.
 
 ## Coverage
 
 | Table | Rows | Description |
 |-------|------|-------------|
-| `markets` | 20,585 | Question, category, volume_24h, liquidity, end_date |
-| `prices` | 17,256,332 | 15-min snapshots for YES/NO outcomes |
-| `orderbooks` | 1,721,218 | Bid/ask depth snapshots |
+| `markets` | 21,545 | Question, category, volume_24h, liquidity, end_date |
+| `prices` | 17,979,964 | 15-min snapshots for YES/NO outcomes |
+| `orderbooks` | 1,793,592 | Bid/ask depth snapshots |
 
 - **Source:** Polymarket Gamma + CLOB APIs (no scraping, no proprietary data)
 - **Update cadence:** every 15 minutes via a ForgeOS launchd job
-- **Categories:** sports (2,939), crypto (2,589), politics (1,386), geopolitics (618), science/tech (283), and more
+- **Categories:** sports (3,086), crypto (2,646), politics (1,422), geopolitics (659), science/tech (293), and more
 - **Format:** SQLite (single file, queryable from any language) + daily Parquet export
 
 ## Get the data

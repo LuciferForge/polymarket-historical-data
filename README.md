@@ -1,18 +1,20 @@
 # Polymarket Historical Data
 
-**17.9M+ price snapshots. 21,545 markets. 88 days of history (2026-03-28 → 2026-06-24). 15-minute resolution.**
+**18.2M+ price snapshots. 21,935 markets. 89 days of history (2026-03-28 → 2026-06-25). 15-minute resolution.**
 
 The complete dataset behind a [public live-traded strategy](https://github.com/LuciferForge/polymarket-crash-bot) (302 trades, 79.8% win rate). Free samples on Hugging Face. Full dataset and live API on Gumroad / [api.protodex.io](https://api.protodex.io).
 
-> Every figure above was counted directly from the delivered SQLite export on 2026-06-25 — what you download is exactly this file, not an estimate. The separate **live API** ([api.protodex.io](https://api.protodex.io)) is refreshed every 15 minutes and currently serves **20.7M+ snapshots across 21,121 markets** (through 2026-06-23). The archive grows ~200k rows/day.
+> Every figure above was counted directly from the delivered SQLite export on 2026-06-26 — what you download is exactly this file, not an estimate. The separate **live API** ([api.protodex.io](https://api.protodex.io)) is refreshed every 15 minutes. The archive grows ~200k rows/day.
+>
+> **Honest note on the order-book table:** ~88% of `orderbooks` rows are empty-book placeholders (Polymarket's long-tail markets are genuinely thin — no resting bids/asks at most 15-min polls). Only ~12% (~214K rows) carry a real two-sided quote. **The price series is the dense, reliable layer and the reason to buy this.** [Full audit write-up.](https://dev.to/manja316/88-of-the-order-book-rows-in-my-dataset-were-fake-heres-how-i-caught-it-4hn8)
 
 ## Coverage
 
 | Table | Rows | Description |
 |-------|------|-------------|
-| `markets` | 21,545 | Question, category, volume_24h, liquidity, end_date |
-| `prices` | 17,979,964 | 15-min snapshots for YES/NO outcomes |
-| `orderbooks` | 1,793,592 | Bid/ask depth snapshots |
+| `markets` | 21,935 | Question, category, volume_24h, liquidity, end_date |
+| `prices` | 18,235,828 | 15-min snapshots for YES/NO outcomes |
+| `orderbooks` | 1,819,192 | Top-of-book snapshots — **~12% (~214K) non-empty**; rest are thin-market placeholders (see note above) |
 
 - **Source:** Polymarket Gamma + CLOB APIs (no scraping, no proprietary data)
 - **Update cadence:** every 15 minutes via a ForgeOS launchd job

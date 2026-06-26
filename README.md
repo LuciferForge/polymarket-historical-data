@@ -1,24 +1,24 @@
 # Polymarket Historical Data
 
-**18.3M+ price snapshots. 22,075 markets. 90 days of history (2026-03-28 → 2026-06-26). 15-minute resolution.**
+**17.3M+ price snapshots. 20,585 markets. 85 days of history (2026-03-28 → 2026-06-21). 15-minute resolution.**
 
 The complete dataset behind a [public live-traded strategy](https://github.com/LuciferForge/polymarket-crash-bot) (302 trades, 79.8% win rate). Free samples on Hugging Face. Full dataset and live API on Gumroad / [api.protodex.io](https://api.protodex.io).
 
-> Every figure above was counted directly from the delivered SQLite export on 2026-06-27 — what you download is exactly this file, not an estimate. The separate **live API** ([api.protodex.io](https://api.protodex.io)) is refreshed every 15 minutes. The archive grows ~200k rows/day.
+> Every figure above counts the **downloadable SQLite export** (last refreshed 2026-06-21) — what you download is exactly that file, not an estimate. The separate **live API** ([api.protodex.io](https://api.protodex.io)) tracks ~18.4M snapshots and is refreshed every 15 minutes; the downloadable archive grows ~200k rows/day between export refreshes.
 >
-> **Honest note on the order-book table:** ~94% of `orderbooks` rows are nominal placeholders (`best_bid` 0.001 / `best_ask` 0.999 — Polymarket's long-tail markets are genuinely thin, with no resting bids/asks at most 15-min polls). Only ~6% (~107K rows) carry a non-placeholder quote, and even those are wide-spread thin-market prints. **The price series is the dense, reliable layer and the reason to buy this — don't buy this for the order book.** [Full audit write-up.](https://dev.to/manja316/88-of-the-order-book-rows-in-my-dataset-were-fake-heres-how-i-caught-it-4hn8)
+> **Honest note on the order-book table:** ~94% of `orderbooks` rows are nominal placeholders (`best_bid` 0.001 / `best_ask` 0.999 — Polymarket's long-tail markets are genuinely thin, with no resting bids/asks at most 15-min polls). Only ~6% (~102K rows) carry a non-placeholder quote, and even those are wide-spread thin-market prints. **The price series is the dense, reliable layer and the reason to buy this — don't buy this for the order book.** [Full audit write-up.](https://dev.to/manja316/88-of-the-order-book-rows-in-my-dataset-were-fake-heres-how-i-caught-it-4hn8)
 
 ## Coverage
 
 | Table | Rows | Description |
 |-------|------|-------------|
-| `markets` | 22,075 | Question, category, volume_24h, liquidity, end_date |
-| `prices` | 18,371,756 | 15-min snapshots for YES/NO outcomes |
-| `orderbooks` | 1,832,792 | Top-of-book snapshots — **~6% (~107K) non-placeholder**; rest are 0.001/0.999 thin-market placeholders (see note above) |
+| `markets` | 20,585 | Question, category, volume_24h, liquidity, end_date |
+| `prices` | 17,256,332 | 15-min snapshots for YES/NO outcomes |
+| `orderbooks` | 1,721,218 | Top-of-book snapshots — **~6% (~102K) non-placeholder**; rest are 0.001/0.999 thin-market placeholders (see note above) |
 
 - **Source:** Polymarket Gamma + CLOB APIs (no scraping, no proprietary data)
 - **Update cadence:** every 15 minutes via a ForgeOS launchd job
-- **Categories:** sports (3,143), crypto (2,701), politics (1,432), geopolitics (665), science/tech (299), and more
+- **Categories:** sports (2,939), crypto (2,589), politics (1,386), geopolitics (618), science/tech (283), and more
 - **Format:** SQLite (single file, queryable from any language) + daily Parquet export
 
 ## Get the data

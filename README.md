@@ -1,10 +1,10 @@
 # Polymarket Historical Data
 
-**17.3M+ price snapshots. 20,585 markets. 85 days of history (2026-03-28 → 2026-06-21). 15-minute resolution.**
+**18.6M+ price snapshots. 22,410 markets. 92 days of history (2026-03-28 → 2026-06-28). 15-minute resolution.**
 
 The complete dataset behind a [public live-traded strategy](https://github.com/LuciferForge/polymarket-crash-bot) (302 trades, 79.8% win rate). Free samples on Hugging Face. Full dataset and live API on Gumroad / [api.protodex.io](https://api.protodex.io).
 
-> Every figure above counts the **downloadable SQLite export** (last refreshed 2026-06-21) — what you download is exactly that file, not an estimate. The separate **live API** ([api.protodex.io](https://api.protodex.io)) tracks ~18.4M snapshots and is refreshed every 15 minutes; the downloadable archive grows ~200k rows/day between export refreshes.
+> Every figure above counts the **downloadable SQLite export** (last refreshed 2026-06-28) — what you download is exactly that file, not an estimate. The separate **live API** ([api.protodex.io](https://api.protodex.io)) is refreshed every 15 minutes; the downloadable archive grows ~200k rows/day between export refreshes.
 >
 > **Honest note on the order-book table:** ~94% of `orderbooks` rows are nominal placeholders (`best_bid` 0.001 / `best_ask` 0.999 — Polymarket's long-tail markets are genuinely thin, with no resting bids/asks at most 15-min polls). Only ~6% (~102K rows) carry a non-placeholder quote, and even those are wide-spread thin-market prints. **The price series is the dense, reliable layer and the reason to buy this — don't buy this for the order book.** [Full audit write-up.](https://dev.to/manja316/88-of-the-order-book-rows-in-my-dataset-were-fake-heres-how-i-caught-it-4hn8)
 
@@ -12,14 +12,26 @@ The complete dataset behind a [public live-traded strategy](https://github.com/L
 
 | Table | Rows | Description |
 |-------|------|-------------|
-| `markets` | 20,585 | Question, category, volume_24h, liquidity, end_date |
-| `prices` | 17,256,332 | 15-min snapshots for YES/NO outcomes |
-| `orderbooks` | 1,721,218 | Top-of-book snapshots — **~6% (~102K) non-placeholder**; rest are 0.001/0.999 thin-market placeholders (see note above) |
+| `markets` | 22,410 | Question, category, volume_24h, liquidity, end_date |
+| `prices` | 18,611,636 | 15-min snapshots for YES/NO outcomes |
+| `orderbooks` | 1,856,388 | Top-of-book snapshots — most rows are 0.001/0.999 thin-market placeholders (see note above); the price series is the dense layer |
 
 - **Source:** Polymarket Gamma + CLOB APIs (no scraping, no proprietary data)
 - **Update cadence:** every 15 minutes via a ForgeOS launchd job
-- **Categories:** sports (2,939), crypto (2,589), politics (1,386), geopolitics (618), science/tech (283), and more
+- **Categories:** sports (12,285), crypto (2,515), politics (1,441), geopolitics (688), science/tech (241), economics (224), and more
 - **Format:** SQLite (single file, queryable from any language) + daily Parquet export
+
+### What you can verify in one query
+
+Of the **19,402 ended markets** that carry a last trade price, **94.6%** closed decisively (last YES price ≥0.95 or ≤0.05) and only 0.9% were still a coin-flip (0.40–0.60). Markets reach consensus almost every time:
+
+```sql
+SELECT ROUND(100.0*AVG(last_trade_price>=0.95 OR last_trade_price<=0.05),1) AS pct_decisive
+FROM markets WHERE end_date < date('now') AND end_date != '' AND last_trade_price IS NOT NULL;
+-- 94.6
+```
+
+**Honest scope note:** this is price *convergence*, not *calibration*. The dataset has **no resolution labels** (`resolved = 0` for all rows) — it's a 15-min price collector, not a settlement feed. So calibration curves, favorite-longshot bias, and Brier scores are **not computable** from this file without an external on-chain resolution join. Price trajectories, crash-bounce, spread, and correlation work **are**.
 
 ## Get the data
 
@@ -27,10 +39,10 @@ The complete dataset behind a [public live-traded strategy](https://github.com/L
 |------|-------|--------|-------|
 | **Free sample (1 day)** | $0 | SQLite + CSV | [Hugging Face](https://huggingface.co/datasets/manja316/polymarket-historical-prices) |
 | **Cross-signal sample** (BTC/ETH/SOL + Polymarket probabilities) | $0 | CSV | [Hugging Face](https://huggingface.co/datasets/manja316/crypto-prediction-market-signals) |
-| Sample paid (1 day full SQLite) | $1 | SQLite | [Gumroad](https://manja8.gumroad.com/l/polymarket-data?utm_source=github&utm_medium=readme&utm_campaign=polymarket-data-2026-06-22) |
-| Full dataset (30 days) | $9 | SQLite | [Gumroad](https://manja8.gumroad.com/l/agyjd?utm_source=github&utm_medium=readme&utm_campaign=polymarket-data-2026-06-22) |
+| Sample paid (1 day full SQLite) | $1 | SQLite | [Gumroad](https://manja8.gumroad.com/l/polymarket-data?utm_source=github&utm_medium=readme&utm_campaign=polymarket-data-2026-06-29) |
+| Full dataset (30 days) | $9 | SQLite | [Gumroad](https://manja8.gumroad.com/l/agyjd?utm_source=github&utm_medium=readme&utm_campaign=polymarket-data-2026-06-29) |
 | **Live API** (no download, query directly) | Free 100/day · $19/mo Pro | HTTP/JSON | [api.protodex.io](https://api.protodex.io) |
-| Live subscription (auto-refreshing dataset) | $29/mo | SQLite | [Gumroad](https://manja8.gumroad.com/l/luneql?utm_source=github&utm_medium=readme&utm_campaign=polymarket-data-2026-06-22) |
+| Live subscription (auto-refreshing dataset) | $29/mo | SQLite | [Gumroad](https://manja8.gumroad.com/l/luneql?utm_source=github&utm_medium=readme&utm_campaign=polymarket-data-2026-06-29) |
 
 ## Quick start (Python)
 

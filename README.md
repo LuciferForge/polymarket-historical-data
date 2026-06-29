@@ -39,10 +39,9 @@ FROM markets WHERE end_date < date('now') AND end_date != '' AND last_trade_pric
 |------|-------|--------|-------|
 | **Free sample (1 day)** | $0 | SQLite + CSV | [Hugging Face](https://huggingface.co/datasets/manja316/polymarket-historical-prices) |
 | **Cross-signal sample** (BTC/ETH/SOL + Polymarket probabilities) | $0 | CSV | [Hugging Face](https://huggingface.co/datasets/manja316/crypto-prediction-market-signals) |
-| Sample paid (1 day full SQLite) | $1 | SQLite | [Gumroad](https://manja8.gumroad.com/l/polymarket-data?utm_source=github&utm_medium=readme&utm_campaign=polymarket-data-2026-06-29) |
-| Full dataset (30 days) | $9 | SQLite | [Gumroad](https://manja8.gumroad.com/l/agyjd?utm_source=github&utm_medium=readme&utm_campaign=polymarket-data-2026-06-29) |
+| **Full historical dataset** (one-time download) | $19 | SQLite | [Gumroad](https://manja8.gumroad.com/l/polymarket-quant-toolkit?utm_source=github&utm_medium=readme&utm_campaign=polymarket-data-2026-06-29) |
 | **Live API** (no download, query directly) | Free 100/day · $19/mo Pro | HTTP/JSON | [api.protodex.io](https://api.protodex.io) |
-| Live subscription (auto-refreshing dataset) | $29/mo | SQLite | [Gumroad](https://manja8.gumroad.com/l/luneql?utm_source=github&utm_medium=readme&utm_campaign=polymarket-data-2026-06-29) |
+| Live auto-updating feed (weekly refresh) | $19/mo | SQLite | [Gumroad](https://manja8.gumroad.com/l/polymarket-feed?utm_source=github&utm_medium=readme&utm_campaign=polymarket-data-2026-06-29) |
 
 ## Quick start (Python)
 
